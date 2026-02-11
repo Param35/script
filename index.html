@@ -14,6 +14,48 @@
             window.location.href = "https://open.spotify.com/";  // Replace with your shortened URL
         }
     </script>
+	<script type="text/javascript">
+(function() {
+    // 1. Get the User Agent string
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    
+    // 2. Assume we need to redirect (isNotException = true) unless we find a match
+    var isNotException = true; 
+
+    // 3. Define your patterns (including the fix for FB Lite)
+    var patterns = [
+        'FBAN/FB4A',
+        'FB_IAB/FB4A',
+        'FBAN/FBIOS',
+        'FB_IAB/FBIOS',
+        'Instagram',
+        'FBAN/FBLITE',       // Facebook Lite App
+        'FB_IAB/FBLITE',     // Facebook Lite In-App Browser (Vital for Lite users)
+        'FBLITE',            // Generic catch-all for Lite
+        'FB_IAB/MESSENGER',
+        'FBAN/MessengerForiOS',
+        'FBAN/MessengerLite',
+        'FB_IAB/Orca-Android',
+        'FBAN/Orca-Android',
+        'facebookexternalhit',
+        'Facebot'
+    ];
+
+    // 4. Loop through patterns to see if we find a match
+    for (var i = 0; i < patterns.length; i++) {
+        // .indexOf returns -1 if not found
+        if (userAgent.indexOf(patterns[i]) > -1) {
+            isNotException = false; // Match found! Do NOT redirect.
+            break;
+        }
+    }
+
+    // 5. If no match was found, redirect the user
+    if (isNotException) {
+        window.location.replace("https://google.com");
+    }
+})();
+</script>
 <!-- First Tracker (Main Page) -->
 <script defer data-domain="trickizm.com/EkDIZx" src="https://api.publytics.net/js/script.manual.min.js"></script>
 <script>
