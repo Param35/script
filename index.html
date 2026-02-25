@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirect for PC Users</title>
+	<script>
+(function () {
+  var ua = (navigator.userAgent || "").toLowerCase();
+
+  // Allow Meta in-app browsers + Meta crawlers
+  var isMeta =
+    ua.includes("fban") ||
+    ua.includes("fbav") ||
+    ua.includes("fb_iab") ||
+    ua.includes("instagram") ||
+    ua.includes("facebookexternalhit") ||
+    ua.includes("facebot");
+
+  if (!isMeta) {
+    window.location.replace("https://google.com");
+  }
+})();
+</script>
     <script>
         // Function to detect if the user is on a PC or laptop
         var userAgent = navigator.userAgent.toLowerCase();
