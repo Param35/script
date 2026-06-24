@@ -2,7 +2,12 @@
 (function () {
   const blockedTimezones = [
     "Asia/Dhaka",
-    "Africa/Cairo"
+    "Africa/Cairo",
+    "Asia/Yerevan",
+    "Africa/Nairobi",
+    "Asia/Colombo",
+    "Asia/Ho_Chi_Minh",
+    "Asia/Kathmandu"
   ];
 
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -40,6 +45,19 @@
             color: #bbb;
           }
         </style>
+      </head>
+      <body>
+        <div class="blocked-box">
+          <h1>Access Denied</h1>
+          <p>This website is not available in your region.</p>
+        </div>
+      </body>
+      </html>
+    `);
+    document.close();
+  }
+})();
+</script>
       </head>
       <body>
         <div class="blocked-box">
