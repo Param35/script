@@ -5,6 +5,28 @@ DirectoryIndex index.php index.html
 # 2) Enable rewrite engine
 RewriteEngine On
 
+# Allow WordPress admin/login/backend tools
+RewriteRule ^wp-admin(/.*)?$ - [L]
+RewriteRule ^wp-login\.php$ - [L]
+RewriteRule ^wp-json(/.*)?$ - [L]
+RewriteRule ^xmlrpc\.php$ - [L]
+
+# Allow plugin/theme/core assets
+RewriteRule ^wp-content/(plugins|themes|uploads)/.*\.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|map)$ - [L]
+RewriteRule ^wp-includes/.*\.(css|js|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot|map)$ - [L]
+
+# Block desktop devices
+RewriteCond %{HTTP_USER_AGENT} "(Windows NT|Macintosh|X11|Linux x86_64)" [NC]
+RewriteCond %{HTTP_USER_AGENT} "!(Android|iPhone|iPad|iPod|Mobile)" [NC]
+RewriteRule ^ - [F,L]
+
+# Allow Meta apps + Meta Lite apps
+RewriteCond %{HTTP_USER_AGENT} "(FBAN|FBAV|FB_IAB|Instagram|Messenger|FBLite|FacebookLite|MessengerLite|IGLite|InstagramLite|Threads)" [NC]
+RewriteRule ^ - [L]
+
+# Block everything else
+RewriteRule ^ - [F,L]
+
 # 3) If the request is already a real file or directory, do nothing
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
